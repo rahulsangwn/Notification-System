@@ -16,7 +16,7 @@ namespace BusinessLogicLayer.Processor
         RecipientsAccess _recipient = new RecipientsAccess();
         UserGroupAccess _group = new UserGroupAccess();
 
-        public void CreateNotification(string typeName, string content)
+        public bool CreateNotification(string typeName, string content)
         {
             Debug.WriteLine($"[+] Type: {typeName}, Content: {content}");
 
@@ -48,6 +48,7 @@ namespace BusinessLogicLayer.Processor
             }
 
             Debug.WriteLine("[>] Notification Pushed to Clients");
+            return true;
         }
     }
 }

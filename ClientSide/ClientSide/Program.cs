@@ -1,11 +1,10 @@
-﻿using ServerUI.Socket;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ServerUI
+namespace ClientSide
 {
     static class Program
     {
@@ -15,14 +14,9 @@ namespace ServerUI
         [STAThread]
         static void Main()
         {
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            // Start Listening to incoming Connection
-            ServerSocket server = new ServerSocket();
-            server.ConnectionListner();
-            Application.Run(new Emitter());
-
+            Application.Run(new ConnectionForm());
         }
     }
 }

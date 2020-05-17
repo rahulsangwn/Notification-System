@@ -23,7 +23,17 @@ namespace ServerUI
 
         private void buttonPush_Click(object sender, EventArgs e)
         {
-            _notification.CreateNotification(comboBoxNotificationType.Text, textBoxNotification.Text);
+            if(_notification.CreateNotification(comboBoxNotificationType.Text, textBoxNotification.Text))
+            {
+                MessageBox.Show("Notifcation Pushed to Subscriber!");
+                Reset();
+            }
+        }
+
+        private void Reset()
+        {
+            comboBoxNotificationType.Text = "";
+            textBoxNotification.Text = "";
         }
     }
 }
