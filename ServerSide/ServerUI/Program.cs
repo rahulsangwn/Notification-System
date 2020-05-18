@@ -19,8 +19,8 @@ namespace ServerUI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             // Start Listening to incoming Connection
-            ServerSocket server = new ServerSocket();
-            server.ConnectionListner();
+            //ServerSocket server = new ServerSocket();
+            //server.ConnectionListner();
             Application.Run(new Emitter());
 
         }

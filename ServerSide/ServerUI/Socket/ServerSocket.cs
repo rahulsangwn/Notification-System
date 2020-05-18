@@ -14,6 +14,38 @@ namespace ServerUI.Socket
     {
         IPAddress serverIP = IPAddress.Any;
         int serverPort = 2222;
+
+        internal void CloseSocket()
+        {
+            try
+            {
+                if (listener != null)
+                {
+                    listener.Stop();
+                    Debug.WriteLine("[-] Server Stoped");
+                }
+
+                foreach(var client in connectedClients)
+                {
+                    client.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.ToString());
+            }
+        }
+
+        internal void SendSomeData()
+        {
+            foreach (var client in connectedClients)
+            {
+                byte[] bytes = Encoding.ASCII.GetBytes("rahul");
+                var stream = client.GetStream();
+                stream.WriteAsync(bytes, 0, 4);
+            }
+        }
+
         TcpListener listener;
         public bool IsRunning;
 

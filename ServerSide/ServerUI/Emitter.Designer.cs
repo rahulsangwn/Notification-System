@@ -91,6 +91,7 @@
             this.Controls.Add(this.buttonPush);
             this.Name = "Emitter";
             this.Text = "Emitter";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Emitter_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

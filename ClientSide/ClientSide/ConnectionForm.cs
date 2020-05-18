@@ -1,8 +1,10 @@
-﻿using ClientSide.Socket;
+﻿using ClientSide.Data;
+using ClientSide.Socket;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Net;
@@ -14,10 +16,14 @@ namespace ClientSide
 {
     public partial class ConnectionForm : Form
     {
+        ClientSocket client;
         public ConnectionForm()
         {
             InitializeComponent();
             buttonServerNext.Enabled = false;
+            textBoxServerIP.Text = "127.0.0.1";
+            textBoxServerPort.Text = "2222";
+            client = new ClientSocket();
         }
 
         private async void buttonConnect_Click(object sender, EventArgs e)
@@ -37,10 +43,11 @@ namespace ClientSide
             {
                 if (1020 < serverPort || serverPort < 65535)
                 {
-                    ClientSocket client = new ClientSocket();
+                    
                     // To Connect to the Server
                     if (await client.ConnectToServer(serverIP, serverPort))
                     {
+                        buttonConnect.Enabled = false;
                         buttonServerNext.Enabled = true;
                         textBoxConnectionLog.Text = "[+] Connected to Server on Port " + serverPort;
                     }
@@ -64,6 +71,7 @@ namespace ClientSide
 
         private void buttonServerNext_Click(object sender, EventArgs e)
         {
+            // Closing Conection Form
             this.Hide();
             ModeSelectionForm modeSelectionForm = new ModeSelectionForm();
             modeSelectionForm.FormClosed += (s, args) => this.Close();

@@ -104,6 +104,7 @@
             this.buttonModeSelectionFormNext.TabIndex = 6;
             this.buttonModeSelectionFormNext.Text = "Next";
             this.buttonModeSelectionFormNext.UseVisualStyleBackColor = true;
+            this.buttonModeSelectionFormNext.Click += new System.EventHandler(this.buttonModeSelectionFormNext_Click);
             // 
             // buttonVerify
             // 
@@ -113,6 +114,7 @@
             this.buttonVerify.TabIndex = 7;
             this.buttonVerify.Text = "Verify";
             this.buttonVerify.UseVisualStyleBackColor = true;
+            this.buttonVerify.Click += new System.EventHandler(this.buttonVerify_Click);
             // 
             // ModeSelectionForm
             // 
