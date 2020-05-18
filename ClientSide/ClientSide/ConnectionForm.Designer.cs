@@ -70,6 +70,7 @@
             this.buttonConnect.TabIndex = 3;
             this.buttonConnect.Text = "Connect";
             this.buttonConnect.UseVisualStyleBackColor = true;
+            this.buttonConnect.Click += new System.EventHandler(this.buttonConnect_Click);
             // 
             // buttonServerNext
             // 
@@ -79,6 +80,7 @@
             this.buttonServerNext.TabIndex = 4;
             this.buttonServerNext.Text = "Next";
             this.buttonServerNext.UseVisualStyleBackColor = true;
+            this.buttonServerNext.Click += new System.EventHandler(this.buttonServerNext_Click);
             // 
             // label2
             // 
@@ -108,6 +110,7 @@
             this.Controls.Add(this.textBoxConnectionLog);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxServerIP);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ConnectionForm";
             this.Text = "Connect to Server";
             this.ResumeLayout(false);

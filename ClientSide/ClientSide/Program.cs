@@ -17,6 +17,7 @@ namespace ClientSide
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new ConnectionForm());
+            //Application.Run(new ModeSelectionForm());
         }
     }
 }
