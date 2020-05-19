@@ -9,10 +9,14 @@ using static ClientSide.Socket.ClientSocket;
 
 namespace ClientSide.Socket
 {
-    class SocketManager
+    public class SocketManager
     {
-        ClientSocket _socket = new ClientSocket();
+        ClientSocket _socket;
 
+        public SocketManager(ClientSocket socket)
+        {
+            _socket = socket;
+        }
         public bool IsValidUser(string user)
         {
             return true;

@@ -16,10 +16,10 @@ namespace ClientSide.Socket
         IPAddress serverIP;
         int serverPort;
         TcpClient client;
+
         public ClientSocket()
         {
-            //SocketManager sm = new SocketManager();
-            //DataReceived += sm.PrintData;
+
         }
         
         public event EventHandler<DataRecEventArgs> DataReceived;
@@ -69,7 +69,6 @@ namespace ClientSide.Socket
                     if (readByteCount <= 0)
                     {
                         Console.WriteLine("Disconnected from server.");
-                        //OnRaisePeerDisconnectedEvent(new ConnectionDisconnectedEventArgs(mClient.Client.RemoteEndPoint.ToString()));
                         client.Close();
                         break;
                     } else

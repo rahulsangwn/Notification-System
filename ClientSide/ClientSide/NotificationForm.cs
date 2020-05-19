@@ -15,10 +15,12 @@ namespace ClientSide
 {
     public partial class NotificationForm : Form
     {
-        ClientSocket _socket = new ClientSocket();
+        ClientSocket _socket; //= new ClientSocket();
 
-        public NotificationForm()
+        public NotificationForm(ClientSocket socket)
         {
+            _socket = socket;
+            Debug.WriteLine("Initialized");
             InitializeComponent();
             textBoxNotification.Enabled = false;
             _socket.DataReceived += PrintInBox;

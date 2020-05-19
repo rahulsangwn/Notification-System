@@ -14,11 +14,13 @@ namespace ClientSide
     public partial class ModeSelectionForm : Form
     {
         SocketManager _manager;
-        public ModeSelectionForm()
+        NotificationForm _notificationForm;
+        public ModeSelectionForm(NotificationForm notificationForm, SocketManager manager)
         {
             InitializeComponent();
             buttonModeSelectionFormNext.Enabled = false;
-            _manager = new SocketManager();
+            _manager = manager;
+            _notificationForm = notificationForm;
         }
 
         private void buttonVerify_Click(object sender, EventArgs e)
@@ -31,9 +33,10 @@ namespace ClientSide
 
         private void buttonModeSelectionFormNext_Click(object sender, EventArgs e)
         {
-            NotificationForm notificationForm = new NotificationForm();
             this.Hide();
-            notificationForm.Show();
+            _notificationForm.FormClosed += (s, args) => this.Close();
+            _notificationForm.Show();
+
         }
     }
 }

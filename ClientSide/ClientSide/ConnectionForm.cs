@@ -17,13 +17,15 @@ namespace ClientSide
     public partial class ConnectionForm : Form
     {
         ClientSocket client;
-        public ConnectionForm()
+        ModeSelectionForm _modeSelectionForm;
+        public ConnectionForm(ClientSocket socket, ModeSelectionForm modeSelectionForm)
         {
             InitializeComponent();
             buttonServerNext.Enabled = false;
             textBoxServerIP.Text = "127.0.0.1";
             textBoxServerPort.Text = "2222";
-            client = new ClientSocket();
+            client = socket;
+            _modeSelectionForm = modeSelectionForm;
         }
 
         private async void buttonConnect_Click(object sender, EventArgs e)
@@ -73,9 +75,8 @@ namespace ClientSide
         {
             // Closing Conection Form
             this.Hide();
-            ModeSelectionForm modeSelectionForm = new ModeSelectionForm();
-            modeSelectionForm.FormClosed += (s, args) => this.Close();
-            modeSelectionForm.Show();
+            _modeSelectionForm.FormClosed += (s, args) => this.Close();
+            _modeSelectionForm.Show();
 
         }
     }

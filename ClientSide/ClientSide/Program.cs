@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Autofac;
+using ClientSide.Factory;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,8 +18,18 @@ namespace ClientSide
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ConnectionForm());
+            
             //Application.Run(new ModeSelectionForm());
+
+            // Initializing factory
+            FactoryContainer factory = new FactoryContainer();
+            var container = factory.Initialize();
+
+            using (var scope = container.BeginLifetimeScope())
+            {
+                var form = scope.Resolve<ConnectionForm>();
+                Application.Run(form);
+            }
         }
     }
 }
