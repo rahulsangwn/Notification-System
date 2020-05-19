@@ -1,8 +1,10 @@
-﻿using ClientSide.Socket;
+﻿using ClientSide.Data;
+using ClientSide.Socket;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,20 +17,27 @@ namespace ClientSide
     {
         SocketManager _manager;
         NotificationForm _notificationForm;
-        public ModeSelectionForm(NotificationForm notificationForm, SocketManager manager)
+        ClientSocket _socket;
+        public ModeSelectionForm(NotificationForm notificationForm, SocketManager manager, ClientSocket socket)
         {
             InitializeComponent();
             buttonModeSelectionFormNext.Enabled = false;
             _manager = manager;
             _notificationForm = notificationForm;
+            _socket = socket;
+            socket.DataReceived += EnableNextButton;
         }
 
-        private void buttonVerify_Click(object sender, EventArgs e)
+        private void EnableNextButton(object sender, DataRecEventArgs e)
         {
-            if(_manager.IsValidUser(textBoxIdentity.Text))
-            {
-                buttonModeSelectionFormNext.Enabled = true;
-            }
+            
+            Debug.WriteLine("Form Data " + e.text.ToString());
+            buttonModeSelectionFormNext.Enabled = true;
+        }
+
+        private async void buttonVerify_Click(object sender, EventArgs e)
+        {
+            var value = await _manager.IsValidUser(textBoxIdentity.Text);
         }
 
         private void buttonModeSelectionFormNext_Click(object sender, EventArgs e)
@@ -36,7 +45,7 @@ namespace ClientSide
             this.Hide();
             _notificationForm.FormClosed += (s, args) => this.Close();
             _notificationForm.Show();
-
         }
+
     }
 }

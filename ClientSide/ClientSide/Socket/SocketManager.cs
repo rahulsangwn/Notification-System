@@ -12,14 +12,18 @@ namespace ClientSide.Socket
     public class SocketManager
     {
         ClientSocket _socket;
-
         public SocketManager(ClientSocket socket)
         {
             _socket = socket;
         }
-        public bool IsValidUser(string user)
+
+        public async Task<bool> IsValidUser(string user)
         {
+            byte[] data = Encoding.ASCII.GetBytes(user);
+            await _socket.SendData(data);
+
             return true;
         }
     }
 }
+

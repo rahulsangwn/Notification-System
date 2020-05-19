@@ -21,11 +21,20 @@ namespace ClientSide.Socket
         {
 
         }
+
+        public async Task SendData(byte[] data)
+        {
+            if(client != null)
+            {
+                var stream = client.GetStream();
+                await stream.WriteAsync(data, 0, data.Length);
+            }
+        }
         
         public event EventHandler<DataRecEventArgs> DataReceived;
-        protected virtual void OnDataReceived()
+        protected virtual void OnDataReceived(string receivedData)
         {
-            DataReceived?.Invoke(this, new DataRecEventArgs() { text = "mydata"});
+            DataReceived?.Invoke(this, new DataRecEventArgs() { text = receivedData.ToString()});
         }
 
         public async Task<bool> ConnectToServer(IPAddress ip, int port)
@@ -59,13 +68,17 @@ namespace ClientSide.Socket
             try
             {
                 StreamReader clientStreamReader = new StreamReader(client.GetStream());
-                char[] buff = new char[64];
+                //NetworkStream networkStream = client.GetStream();
+                
+                char[] buff = new char[1024];
                 int readByteCount = 0;
+                //buff = client.GetStream()
 
                 while (true)
                 {
                     readByteCount = await clientStreamReader.ReadAsync(buff, 0, buff.Length);
-
+                    //readByteCount = client.ReceiveBufferSize;
+                    
                     if (readByteCount <= 0)
                     {
                         Console.WriteLine("Disconnected from server.");
@@ -73,16 +86,13 @@ namespace ClientSide.Socket
                         break;
                     } else
                     {
-                        OnDataReceived();
+                        var receivedData = new String(buff);
+                        //await networkStream.ReadAsync(buff, 0, client.ReceiveBufferSize);
+                        OnDataReceived(receivedData);
+                        //Debug.WriteLine(SocketHelper.ByteArrayToObject<NotificationEntity>(buff));
                     }
-                    Console.WriteLine(string.Format("Received bytes: {0} - Message: {1}",
-                        readByteCount, new string(buff)));
-
-                    //OnRaiseTextReceivedEvent(
-                    //new TextReceivedEventArgs(
-                    //mClient.Client.RemoteEndPoint.ToString(),
-                    //new string(buff)));
-
+                    //Console.WriteLine(string.Format("Received bytes: {0} - Message: {1}",
+                    //    readByteCount, new string(buff)));
 
                     Array.Clear(buff, 0, buff.Length);
                 }

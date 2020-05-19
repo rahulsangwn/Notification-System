@@ -14,6 +14,7 @@ namespace ServerUI.Socket
     {
         IPAddress serverIP = IPAddress.Any;
         int serverPort = 2222;
+        SocketHelper _helper = new SocketHelper();
 
         internal void CloseSocket()
         {
@@ -36,13 +37,12 @@ namespace ServerUI.Socket
             }
         }
 
-        internal void SendSomeData()
+        internal void Send(byte[] data)
         {
             foreach (var client in connectedClients)
             {
-                byte[] bytes = Encoding.ASCII.GetBytes("rahul");
                 var stream = client.GetStream();
-                stream.WriteAsync(bytes, 0, 4);
+                stream.WriteAsync(data, 0, data.Length);
             }
         }
 
@@ -99,7 +99,7 @@ namespace ServerUI.Socket
                 {
                     int recievedNoOfBytes = await reader.ReadAsync(buff, 0, buff.Length);
 
-                    if (recievedNoOfBytes == 0)
+                    if (recievedNoOfBytes <= 0)
                     {
                         DisconnectClient(client);
 
@@ -109,6 +109,7 @@ namespace ServerUI.Socket
 
                     string recivedText = new string(buff);
                     Debug.WriteLine("Recived Data: " + recivedText);
+                    ReadingHandler(recivedText);
                     Array.Clear(buff, 0, buff.Length);
                     
                 }
@@ -117,6 +118,15 @@ namespace ServerUI.Socket
             {
                 DisconnectClient(client);
                 Debug.WriteLine("[-] Exception: " + e.ToString());
+            }
+        }
+
+        private void ReadingHandler(string recivedText)
+        {
+            if(_helper.VerifyIdentiy(recivedText))
+            {
+                byte[] response = Encoding.ASCII.GetBytes("true");
+                Send(response);
             }
         }
 

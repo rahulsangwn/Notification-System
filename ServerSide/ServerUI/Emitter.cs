@@ -26,12 +26,12 @@ namespace ServerUI
 
         private void buttonPush_Click(object sender, EventArgs e)
         {
-            //if(_notification.CreateNotification(comboBoxNotificationType.Text, textBoxNotification.Text))
+            //if (_notification.CreateNotification(comboBoxNotificationType.Text, textBoxNotification.Text))
             //{
             //    MessageBox.Show("Notifcation Pushed to Subscriber!");
             //    Reset();
             //}
-            _manager.SendSomeData();
+            _manager.SendData();
         }
 
         private void Reset()
