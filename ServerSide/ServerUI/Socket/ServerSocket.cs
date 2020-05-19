@@ -127,6 +127,11 @@ namespace ServerUI.Socket
             {
                 byte[] response = Encoding.ASCII.GetBytes("true");
                 Send(response);
+            } 
+            else
+            {
+                byte[] response = Encoding.ASCII.GetBytes("false");
+                Send(response);
             }
         }
 

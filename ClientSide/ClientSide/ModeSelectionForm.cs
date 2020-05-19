@@ -18,6 +18,7 @@ namespace ClientSide
         SocketManager _manager;
         NotificationForm _notificationForm;
         ClientSocket _socket;
+
         public ModeSelectionForm(NotificationForm notificationForm, SocketManager manager, ClientSocket socket)
         {
             InitializeComponent();
@@ -28,20 +29,45 @@ namespace ClientSide
             socket.DataReceived += EnableNextButton;
         }
 
+        // Enabling Next Button based on Verification Resopnse
         private void EnableNextButton(object sender, DataRecEventArgs e)
         {
-            
-            Debug.WriteLine("Form Data " + e.text.ToString());
-            buttonModeSelectionFormNext.Enabled = true;
+            if (e.text == "true")
+            {
+                buttonModeSelectionFormNext.Enabled = true;
+            }
+            else if(e.text == "false")
+            {
+                buttonModeSelectionFormNext.Enabled = false;
+            }
         }
 
+        // Verify Email Id or Phone Number entered
         private async void buttonVerify_Click(object sender, EventArgs e)
         {
-            var value = await _manager.IsValidUser(textBoxIdentity.Text);
+            bool email = radioButtonEmail.Checked;
+            bool sms = radioButtonSMS.Checked;
+            bool portal = radioButtonPortal.Checked;
+
+            StringBuilder verifyRequest = new StringBuilder();
+
+            if (email)
+                verifyRequest.Append("Email:");
+            else if (sms)
+                verifyRequest.Append("SMS:");
+            else if (portal)
+                verifyRequest.Append("Portal:");
+
+            verifyRequest.Append(textBoxIdentity.Text);
+            var value = await _manager.IsValidUser(verifyRequest.ToString());
         }
 
         private void buttonModeSelectionFormNext_Click(object sender, EventArgs e)
         {
+            // Unsubscribe From DataReceived Event
+            _socket.DataReceived -= EnableNextButton;
+
+            // Closing Connection Form and Opening Model Selection Form
             this.Hide();
             _notificationForm.FormClosed += (s, args) => this.Close();
             _notificationForm.Show();

@@ -28,8 +28,11 @@ namespace ClientSide
 
         private void PrintInBox(object sender, DataRecEventArgs e)
         {
-            Debug.WriteLine("Called");
-            textBoxNotification.AppendText(e.text);
+            if(e.text.StartsWith("Notification"))
+            {
+                textBoxNotification.AppendText(e.text);
+                textBoxNotification.AppendText(Environment.NewLine);
+            }
         }
     }
 }

@@ -87,6 +87,7 @@ namespace ClientSide.Socket
                     } else
                     {
                         var receivedData = new String(buff);
+                        receivedData = receivedData.Replace("\0", string.Empty);
                         //await networkStream.ReadAsync(buff, 0, client.ReceiveBufferSize);
                         OnDataReceived(receivedData);
                         //Debug.WriteLine(SocketHelper.ByteArrayToObject<NotificationEntity>(buff));
