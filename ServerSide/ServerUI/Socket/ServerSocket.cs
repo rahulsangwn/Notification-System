@@ -37,13 +37,10 @@ namespace ServerUI.Socket
             }
         }
 
-        internal void Send(byte[] data)
+        internal void Send(byte[] data, TcpClient client)
         {
-            foreach (var client in connectedClients)
-            {
-                var stream = client.GetStream();
-                stream.WriteAsync(data, 0, data.Length);
-            }
+            var stream = client.GetStream();
+            stream.WriteAsync(data, 0, data.Length);
         }
 
         TcpListener listener;
@@ -109,7 +106,7 @@ namespace ServerUI.Socket
 
                     string recivedText = new string(buff);
                     Debug.WriteLine("Recived Data: " + recivedText);
-                    ReadingHandler(recivedText);
+                    ReadingHandler(recivedText, client);
                     Array.Clear(buff, 0, buff.Length);
                     
                 }
@@ -121,17 +118,21 @@ namespace ServerUI.Socket
             }
         }
 
-        private void ReadingHandler(string recivedText)
+        private void ReadingHandler(string recivedText, TcpClient client)
         {
-            if(_helper.VerifyIdentiy(recivedText))
+            var userId = _helper.VerifyIdentiy(recivedText);
+            byte[] response = userId != 0 ? Encoding.ASCII.GetBytes("true") : Encoding.ASCII.GetBytes("false");
+
+            Send(response, client);
+
+            // If user is valid
+            if (userId != 0)
             {
-                byte[] response = Encoding.ASCII.GetBytes("true");
-                Send(response);
-            } 
-            else
-            {
-                byte[] response = Encoding.ASCII.GetBytes("false");
-                Send(response);
+                var notifications = _helper.GetNotifications(userId);
+                foreach(var notification in notifications)
+                {
+                    Send(notification, client);
+                }
             }
         }
 

@@ -10,10 +10,16 @@ namespace ServerUI.Socket
     public class SocketHelper
     {
         UserProcessor _uprocessor = new UserProcessor();
+        RecipientsProcessor _rprocessor = new RecipientsProcessor();
 
-        internal bool VerifyIdentiy(string recivedText)
+        internal int VerifyIdentiy(string recivedText)
         {
             return _uprocessor.Identify(recivedText);
+        }
+
+        internal List<byte[]> GetNotifications(int userId)
+        {
+            return _rprocessor.GetNotifications(userId);
         }
     }
 }

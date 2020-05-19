@@ -30,8 +30,13 @@ namespace ClientSide
         {
             if(e.text.StartsWith("Notification"))
             {
-                textBoxNotification.AppendText(e.text);
-                textBoxNotification.AppendText(Environment.NewLine);
+                string[] notifications = e.text.Split('.');
+                foreach(var notification in notifications)
+                {
+                    textBoxNotification.AppendText(e.text + Environment.NewLine);
+
+                }
+                //textBoxNotification.AppendText(Environment.NewLine);
             }
         }
     }

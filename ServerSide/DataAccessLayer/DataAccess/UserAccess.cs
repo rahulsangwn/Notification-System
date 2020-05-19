@@ -10,14 +10,20 @@ namespace DataAccessLayer.DataAccess
     {
         NotificationContext _context = new NotificationContext();
 
-        public bool IsValidEmail(string email)
+        public int IsValidEmail(string email)
         {
-            return _context.Users.Any(u => u.Email == email);
+            if (_context.Users.Any(u => u.Email == email))
+                return _context.Users.Where(u => u.Email == email).Select(u => u.UserId).First();
+            else
+                return 0;
         }
 
-        public bool IsValidPhone(string phone)
+        public int IsValidPhone(string phone)
         {
-            return _context.Users.Any(u => u.Phone == phone);
+            if (_context.Users.Any(u => u.Phone == phone))
+                return _context.Users.Where(u => u.Phone == phone).Select(u => u.UserId).First();
+            else
+                return 0;
         }
     }
 }

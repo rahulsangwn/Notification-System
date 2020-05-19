@@ -11,7 +11,7 @@ namespace BusinessLogicLayer.Processor
     {
         UserAccess _user = new UserAccess();
 
-        public bool Identify(string receivedText)
+        public int Identify(string receivedText)
         {
             receivedText = receivedText.Replace("\0", string.Empty);
             string[] text = receivedText.Split(':');
@@ -25,7 +25,7 @@ namespace BusinessLogicLayer.Processor
                 return _user.IsValidPhone(text[1]);
             }
 
-            return false;
+            return 0;
         }
     }
 }

@@ -17,5 +17,10 @@ namespace DataAccessLayer.DataAccess
 
             return notification.NotifId;
         }
+
+        public Notification Get(int id)
+        {
+            return _context.Notifications.First(n => n.NotifId == id);
+        }
     }
 }

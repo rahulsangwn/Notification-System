@@ -16,5 +16,10 @@ namespace DataAccessLayer.DataAccess
             _context.SaveChanges();
             return true;
         }
+
+        public List<Recipient> Get(int userId)
+        {
+            return _context.Recipients.Where(r => r.UserId == userId).ToList();
+        }
     }
 }
