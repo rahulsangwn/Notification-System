@@ -22,10 +22,15 @@ namespace ClientSide
         public ModeSelectionForm(NotificationForm notificationForm, SocketManager manager, ClientSocket socket)
         {
             InitializeComponent();
+
             buttonModeSelectionFormNext.Enabled = false;
+            buttonUpdateSubscriptions.Hide();
+            checkedListBoxSubscription.Enabled = false;
+
             _manager = manager;
             _notificationForm = notificationForm;
             _socket = socket;
+
             socket.DataReceived += EnableNextButton;
         }
 
@@ -35,16 +40,22 @@ namespace ClientSide
             if (e.text == "true")
             {
                 buttonModeSelectionFormNext.Enabled = true;
+                checkedListBoxSubscription.Enabled = true;
+                buttonUpdateSubscriptions.Show();
             }
             else if(e.text == "false")
             {
                 buttonModeSelectionFormNext.Enabled = false;
+                checkedListBoxSubscription.Enabled = false;
+                buttonUpdateSubscriptions.Hide();
             }
         }
 
         // Verify Email Id or Phone Number entered
         private async void buttonVerify_Click(object sender, EventArgs e)
         {
+            // Clear the selected check boxes;
+            checkedListBoxSubscription.ClearSelected();
             _notificationForm.ClearData();
             bool email = radioButtonEmail.Checked;
             bool sms = radioButtonSMS.Checked;
@@ -74,5 +85,21 @@ namespace ClientSide
             _notificationForm.Show();
         }
 
+        private void buttonUpdateSubscriptions_Click(object sender, EventArgs e)
+        {
+            StringBuilder subscriptionsIndicies = new StringBuilder();
+            for (int i=0; i<5; i++)
+            {
+                if(checkedListBoxSubscription.GetItemChecked(i))
+                {
+                    subscriptionsIndicies.Append(i + ":");
+                }
+            }
+
+            if(!String.IsNullOrEmpty(subscriptionsIndicies.ToString()))
+            {
+                subscriptionsIndicies.Remove(subscriptionsIndicies.Length - 2, subscriptionsIndicies.Length - 1);
+            }
+        }
     }
 }

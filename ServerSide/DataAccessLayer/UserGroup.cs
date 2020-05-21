@@ -5,7 +5,6 @@ namespace DataAccessLayer
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-
     public partial class UserGroup
     {
         [Key]
@@ -16,6 +15,10 @@ namespace DataAccessLayer
         public int TypeId { get; set; }
 
         public int CommModes { get; set; }
+
+        public int OrgGroupId { get; set; }
+
+        public virtual Group Group { get; set; }
 
         public virtual CommunicationMode CommunicationMode { get; set; }
 

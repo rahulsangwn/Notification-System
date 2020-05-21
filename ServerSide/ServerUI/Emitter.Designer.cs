@@ -38,7 +38,7 @@
             // 
             this.buttonPush.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.buttonPush.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonPush.Location = new System.Drawing.Point(282, 409);
+            this.buttonPush.Location = new System.Drawing.Point(50, 376);
             this.buttonPush.Name = "buttonPush";
             this.buttonPush.Size = new System.Drawing.Size(121, 39);
             this.buttonPush.TabIndex = 2;
@@ -49,7 +49,7 @@
             // textBoxNotification
             // 
             this.textBoxNotification.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxNotification.Location = new System.Drawing.Point(282, 213);
+            this.textBoxNotification.Location = new System.Drawing.Point(50, 190);
             this.textBoxNotification.Multiline = true;
             this.textBoxNotification.Name = "textBoxNotification";
             this.textBoxNotification.Size = new System.Drawing.Size(628, 131);
@@ -59,7 +59,7 @@
             // 
             this.labelNotificationType.AutoSize = true;
             this.labelNotificationType.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNotificationType.Location = new System.Drawing.Point(37, 110);
+            this.labelNotificationType.Location = new System.Drawing.Point(45, 54);
             this.labelNotificationType.Name = "labelNotificationType";
             this.labelNotificationType.Size = new System.Drawing.Size(206, 30);
             this.labelNotificationType.TabIndex = 6;
@@ -75,7 +75,7 @@
             "Holiday",
             "Organization News",
             "New Policy"});
-            this.comboBoxNotificationType.Location = new System.Drawing.Point(282, 107);
+            this.comboBoxNotificationType.Location = new System.Drawing.Point(50, 106);
             this.comboBoxNotificationType.Name = "comboBoxNotificationType";
             this.comboBoxNotificationType.Size = new System.Drawing.Size(628, 37);
             this.comboBoxNotificationType.TabIndex = 7;
@@ -84,7 +84,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1231, 622);
+            this.ClientSize = new System.Drawing.Size(736, 465);
             this.Controls.Add(this.comboBoxNotificationType);
             this.Controls.Add(this.labelNotificationType);
             this.Controls.Add(this.textBoxNotification);

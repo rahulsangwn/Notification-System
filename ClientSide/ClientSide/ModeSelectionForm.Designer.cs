@@ -36,6 +36,9 @@
             this.textBoxIdentity = new System.Windows.Forms.TextBox();
             this.buttonModeSelectionFormNext = new System.Windows.Forms.Button();
             this.buttonVerify = new System.Windows.Forms.Button();
+            this.checkedListBoxSubscription = new System.Windows.Forms.CheckedListBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.buttonUpdateSubscriptions = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -83,7 +86,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(55, 227);
+            this.label2.Location = new System.Drawing.Point(51, 169);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(119, 20);
             this.label2.TabIndex = 4;
@@ -91,24 +94,24 @@
             // 
             // textBoxIdentity
             // 
-            this.textBoxIdentity.Location = new System.Drawing.Point(195, 221);
+            this.textBoxIdentity.Location = new System.Drawing.Point(199, 169);
             this.textBoxIdentity.Name = "textBoxIdentity";
             this.textBoxIdentity.Size = new System.Drawing.Size(262, 26);
             this.textBoxIdentity.TabIndex = 5;
             // 
             // buttonModeSelectionFormNext
             // 
-            this.buttonModeSelectionFormNext.Location = new System.Drawing.Point(285, 321);
+            this.buttonModeSelectionFormNext.Location = new System.Drawing.Point(349, 439);
             this.buttonModeSelectionFormNext.Name = "buttonModeSelectionFormNext";
-            this.buttonModeSelectionFormNext.Size = new System.Drawing.Size(113, 41);
+            this.buttonModeSelectionFormNext.Size = new System.Drawing.Size(168, 41);
             this.buttonModeSelectionFormNext.TabIndex = 6;
-            this.buttonModeSelectionFormNext.Text = "Next";
+            this.buttonModeSelectionFormNext.Text = "Show Notifications";
             this.buttonModeSelectionFormNext.UseVisualStyleBackColor = true;
             this.buttonModeSelectionFormNext.Click += new System.EventHandler(this.buttonModeSelectionFormNext_Click);
             // 
             // buttonVerify
             // 
-            this.buttonVerify.Location = new System.Drawing.Point(497, 216);
+            this.buttonVerify.Location = new System.Drawing.Point(497, 162);
             this.buttonVerify.Name = "buttonVerify";
             this.buttonVerify.Size = new System.Drawing.Size(87, 40);
             this.buttonVerify.TabIndex = 7;
@@ -116,11 +119,47 @@
             this.buttonVerify.UseVisualStyleBackColor = true;
             this.buttonVerify.Click += new System.EventHandler(this.buttonVerify_Click);
             // 
+            // checkedListBoxSubscription
+            // 
+            this.checkedListBoxSubscription.FormattingEnabled = true;
+            this.checkedListBoxSubscription.Items.AddRange(new object[] {
+            "Events or Celebrations",
+            "Urgent Help",
+            "Holiday",
+            "Organization News",
+            "New Policy"});
+            this.checkedListBoxSubscription.Location = new System.Drawing.Point(55, 275);
+            this.checkedListBoxSubscription.Name = "checkedListBoxSubscription";
+            this.checkedListBoxSubscription.Size = new System.Drawing.Size(529, 130);
+            this.checkedListBoxSubscription.TabIndex = 10;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(51, 242);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(109, 20);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Subscriptions:";
+            // 
+            // buttonUpdateSubscriptions
+            // 
+            this.buttonUpdateSubscriptions.Location = new System.Drawing.Point(107, 440);
+            this.buttonUpdateSubscriptions.Name = "buttonUpdateSubscriptions";
+            this.buttonUpdateSubscriptions.Size = new System.Drawing.Size(181, 40);
+            this.buttonUpdateSubscriptions.TabIndex = 12;
+            this.buttonUpdateSubscriptions.Text = "Update Subscriptions";
+            this.buttonUpdateSubscriptions.UseVisualStyleBackColor = true;
+            this.buttonUpdateSubscriptions.Click += new System.EventHandler(this.buttonUpdateSubscriptions_Click);
+            // 
             // ModeSelectionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(675, 422);
+            this.ClientSize = new System.Drawing.Size(653, 511);
+            this.Controls.Add(this.buttonUpdateSubscriptions);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.checkedListBoxSubscription);
             this.Controls.Add(this.buttonVerify);
             this.Controls.Add(this.buttonModeSelectionFormNext);
             this.Controls.Add(this.textBoxIdentity);
@@ -147,5 +186,8 @@
         private System.Windows.Forms.TextBox textBoxIdentity;
         private System.Windows.Forms.Button buttonModeSelectionFormNext;
         private System.Windows.Forms.Button buttonVerify;
+        private System.Windows.Forms.CheckedListBox checkedListBoxSubscription;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button buttonUpdateSubscriptions;
     }
 }

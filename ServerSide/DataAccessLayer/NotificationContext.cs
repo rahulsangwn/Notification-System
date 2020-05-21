@@ -18,6 +18,7 @@ namespace DataAccessLayer
         public virtual DbSet<Recipient> Recipients { get; set; }
         public virtual DbSet<UserGroup> UserGroups { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Group> Groups { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
