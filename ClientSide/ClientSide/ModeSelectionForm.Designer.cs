@@ -86,7 +86,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(51, 169);
+            this.label2.Location = new System.Drawing.Point(51, 214);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(119, 20);
             this.label2.TabIndex = 4;
@@ -94,14 +94,14 @@
             // 
             // textBoxIdentity
             // 
-            this.textBoxIdentity.Location = new System.Drawing.Point(199, 169);
+            this.textBoxIdentity.Location = new System.Drawing.Point(201, 208);
             this.textBoxIdentity.Name = "textBoxIdentity";
             this.textBoxIdentity.Size = new System.Drawing.Size(262, 26);
             this.textBoxIdentity.TabIndex = 5;
             // 
             // buttonModeSelectionFormNext
             // 
-            this.buttonModeSelectionFormNext.Location = new System.Drawing.Point(349, 439);
+            this.buttonModeSelectionFormNext.Location = new System.Drawing.Point(107, 302);
             this.buttonModeSelectionFormNext.Name = "buttonModeSelectionFormNext";
             this.buttonModeSelectionFormNext.Size = new System.Drawing.Size(168, 41);
             this.buttonModeSelectionFormNext.TabIndex = 6;
@@ -111,7 +111,7 @@
             // 
             // buttonVerify
             // 
-            this.buttonVerify.Location = new System.Drawing.Point(497, 162);
+            this.buttonVerify.Location = new System.Drawing.Point(497, 201);
             this.buttonVerify.Name = "buttonVerify";
             this.buttonVerify.Size = new System.Drawing.Size(87, 40);
             this.buttonVerify.TabIndex = 7;
@@ -123,20 +123,22 @@
             // 
             this.checkedListBoxSubscription.FormattingEnabled = true;
             this.checkedListBoxSubscription.Items.AddRange(new object[] {
-            "Events or Celebrations",
-            "Urgent Help",
-            "Holiday",
-            "Organization News",
-            "New Policy"});
-            this.checkedListBoxSubscription.Location = new System.Drawing.Point(55, 275);
+            "All",
+            "Gurgoan",
+            "Jaipur",
+            "Noida",
+            "Banglore",
+            "Engineer",
+            "HR"});
+            this.checkedListBoxSubscription.Location = new System.Drawing.Point(652, 86);
             this.checkedListBoxSubscription.Name = "checkedListBoxSubscription";
-            this.checkedListBoxSubscription.Size = new System.Drawing.Size(529, 130);
+            this.checkedListBoxSubscription.Size = new System.Drawing.Size(293, 256);
             this.checkedListBoxSubscription.TabIndex = 10;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(51, 242);
+            this.label3.Location = new System.Drawing.Point(648, 63);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(109, 20);
             this.label3.TabIndex = 11;
@@ -144,7 +146,7 @@
             // 
             // buttonUpdateSubscriptions
             // 
-            this.buttonUpdateSubscriptions.Location = new System.Drawing.Point(107, 440);
+            this.buttonUpdateSubscriptions.Location = new System.Drawing.Point(403, 302);
             this.buttonUpdateSubscriptions.Name = "buttonUpdateSubscriptions";
             this.buttonUpdateSubscriptions.Size = new System.Drawing.Size(181, 40);
             this.buttonUpdateSubscriptions.TabIndex = 12;
@@ -156,7 +158,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(653, 511);
+            this.ClientSize = new System.Drawing.Size(1004, 390);
             this.Controls.Add(this.buttonUpdateSubscriptions);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.checkedListBoxSubscription);

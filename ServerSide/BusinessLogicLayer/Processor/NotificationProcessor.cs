@@ -16,12 +16,10 @@ namespace BusinessLogicLayer.Processor
         RecipientsAccess _recipient = new RecipientsAccess();
         UserGroupAccess _group = new UserGroupAccess();
 
-        public int CreateNotification(string typeName, string content)
+        public int CreateNotification(string typeName, string recivers, string content)
         {
-            Debug.WriteLine($"[+] Type: {typeName}, Content: {content}");
-
             // Get notification type
-            var type = _type.Get(typeName); 
+            NotificationType type = _type.Get(typeName); 
 
             Notification notification = new Notification();
             notification.CreateDate = DateTime.Now;
@@ -32,7 +30,7 @@ namespace BusinessLogicLayer.Processor
             var notifId = _notification.Create(notification);
 
             // Get list of user who subscribed this type of event
-            var users = _group.GetUserList(type.TypeId);
+            int[] users = _group.GetUserList(recivers);
 
             // Insert notification for each user in Recipients queue
             foreach (var user in users)

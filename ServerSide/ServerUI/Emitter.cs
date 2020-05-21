@@ -21,12 +21,14 @@ namespace ServerUI
         {
             _notification = new NotificationProcessor();
             _manager = new ServerManager();
+
             InitializeComponent();
+            comboBoxGroup.SelectedItem = "All";
         }
 
         private void buttonPush_Click(object sender, EventArgs e)
         {
-            int notifId = _notification.CreateNotification(comboBoxNotificationType.Text, textBoxNotification.Text);
+            int notifId = _notification.CreateNotification(comboBoxNotificationType.Text, comboBoxGroup.Text, textBoxNotification.Text);
             if (notifId != 0)
             {
                 _manager.PushNotification(notifId);
@@ -38,6 +40,7 @@ namespace ServerUI
         private void Reset()
         {
             comboBoxNotificationType.Text = "";
+            comboBoxGroup.Text = "All";
             textBoxNotification.Text = "";
         }
 
