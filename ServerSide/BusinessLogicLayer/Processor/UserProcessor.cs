@@ -20,7 +20,7 @@ namespace BusinessLogicLayer.Processor
             {
                 return _user.IsValidEmail(text[1]);
             } 
-            else if (text[0] == "Phone")
+            else if (text[0] == "SMS")
             {
                 return _user.IsValidPhone(text[1]);
             }

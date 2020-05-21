@@ -17,9 +17,9 @@ namespace ServerUI.Socket
             return _uprocessor.Identify(recivedText);
         }
 
-        internal List<byte[]> GetNotifications(int userId)
+        internal byte[] GetNotifications(int userId, char mode)
         {
-            return _rprocessor.GetNotifications(userId);
+            return _rprocessor.GetNotifications(userId, mode);
         }
     }
 }

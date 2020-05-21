@@ -19,7 +19,6 @@ namespace ClientSide.Socket
 
         public ClientSocket()
         {
-
         }
 
         public async Task SendData(byte[] data)
@@ -68,16 +67,13 @@ namespace ClientSide.Socket
             try
             {
                 StreamReader clientStreamReader = new StreamReader(client.GetStream());
-                //NetworkStream networkStream = client.GetStream();
                 
                 char[] buff = new char[1024];
                 int readByteCount = 0;
-                //buff = client.GetStream()
 
                 while (true)
                 {
                     readByteCount = await clientStreamReader.ReadAsync(buff, 0, buff.Length);
-                    //readByteCount = client.ReceiveBufferSize;
                     
                     if (readByteCount <= 0)
                     {
@@ -88,13 +84,8 @@ namespace ClientSide.Socket
                     {
                         var receivedData = new String(buff);
                         receivedData = receivedData.Replace("\0", string.Empty);
-                        //await networkStream.ReadAsync(buff, 0, client.ReceiveBufferSize);
                         OnDataReceived(receivedData);
-                        //Debug.WriteLine(SocketHelper.ByteArrayToObject<NotificationEntity>(buff));
                     }
-                    //Console.WriteLine(string.Format("Received bytes: {0} - Message: {1}",
-                    //    readByteCount, new string(buff)));
-
                     Array.Clear(buff, 0, buff.Length);
                 }
             }

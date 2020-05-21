@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.DataAccess
 {
-    class CommunicationModesAccess
+    public class CommunicationModesAccess
     {
+        NotificationContext _context = new NotificationContext();
+
+        public string GetName(int mode)
+        {
+            return _context.CommunicationModes.Where(m => m.Value == mode).Select(m => m.Name).ToString();
+        }
     }
 }

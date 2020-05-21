@@ -15,29 +15,36 @@ namespace ClientSide
 {
     public partial class NotificationForm : Form
     {
-        ClientSocket _socket; //= new ClientSocket();
+        ClientSocket _socket;
 
         public NotificationForm(ClientSocket socket)
         {
             _socket = socket;
-            Debug.WriteLine("Initialized");
             InitializeComponent();
             textBoxNotification.Enabled = false;
             _socket.DataReceived += PrintInBox;
         }
 
-        private void PrintInBox(object sender, DataRecEventArgs e)
+        private async void PrintInBox(object sender, DataRecEventArgs e)
         {
             if(e.text.StartsWith("Notification"))
             {
-                string[] notifications = e.text.Split('.');
+                string[] notifications = e.text.Split(':');
+                StringBuilder acks = new StringBuilder("Ack:");
                 foreach(var notification in notifications)
                 {
-                    textBoxNotification.AppendText(e.text + Environment.NewLine);
-
+                    textBoxNotification.AppendText(notification);
+                    textBoxNotification.AppendText(Environment.NewLine);
+                    var notifId = notification.Split(' ')[1];
+                    acks.Append(notifId + ":");
                 }
-                //textBoxNotification.AppendText(Environment.NewLine);
+                await _socket.SendData(Encoding.ASCII.GetBytes(acks.ToString()));
             }
+        }
+
+        internal void ClearData()
+        {
+            textBoxNotification.Text = "";
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ServerUI.Socket
@@ -26,7 +27,7 @@ namespace ServerUI.Socket
                     Debug.WriteLine("[-] Server Stoped");
                 }
 
-                foreach(var client in connectedClients)
+                foreach (var client in connectedClients)
                 {
                     client.Close();
                 }
@@ -47,10 +48,13 @@ namespace ServerUI.Socket
         public bool IsRunning;
 
         List<TcpClient> connectedClients;
+        public static Dictionary<TcpClient, string> loginedClients;
 
+        public static Dictionary<TcpClient, string> GetClients() { return loginedClients; }
         public ServerSocket()
         {
             connectedClients = new List<TcpClient>();
+            loginedClients = new Dictionary<TcpClient, string>();
         }
 
         public async void ConnectionListner()
@@ -90,7 +94,7 @@ namespace ServerUI.Socket
                 stream = client.GetStream();
                 reader = new StreamReader(stream);
 
-                char[] buff = new char[128];
+                char[] buff = new char[1024];
 
                 while(IsRunning)
                 {
@@ -120,18 +124,28 @@ namespace ServerUI.Socket
 
         private void ReadingHandler(string recivedText, TcpClient client)
         {
-            var userId = _helper.VerifyIdentiy(recivedText);
-            byte[] response = userId != 0 ? Encoding.ASCII.GetBytes("true") : Encoding.ASCII.GetBytes("false");
-
-            Send(response, client);
-
-            // If user is valid
-            if (userId != 0)
+            if (recivedText.StartsWith("Ack"))
             {
-                var notifications = _helper.GetNotifications(userId);
-                foreach(var notification in notifications)
+
+            } 
+            else
+            {
+                if (!loginedClients.ContainsKey(client))
                 {
-                    Send(notification, client);
+                    loginedClients.Add(client, recivedText);
+                }
+                var userId = _helper.VerifyIdentiy(recivedText);
+                byte[] response = userId != 0 ? Encoding.ASCII.GetBytes("true") : Encoding.ASCII.GetBytes("false");
+
+                Send(response, client);
+                int milliseconds = 1000;
+                Thread.Sleep(milliseconds);
+
+                // If user is valid
+                if (userId != 0)
+                {
+                    var notifications = _helper.GetNotifications(userId, recivedText[0]);
+                    Send(notifications, client);
                 }
             }
         }
@@ -141,6 +155,11 @@ namespace ServerUI.Socket
             if (connectedClients.Contains(client))
             {
                 connectedClients.Remove(client);
+            }
+
+            if (loginedClients.ContainsKey(client))
+            {
+                loginedClients.Remove(client);
             }
         }
     }

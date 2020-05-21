@@ -45,6 +45,7 @@ namespace ClientSide
         // Verify Email Id or Phone Number entered
         private async void buttonVerify_Click(object sender, EventArgs e)
         {
+            _notificationForm.ClearData();
             bool email = radioButtonEmail.Checked;
             bool sms = radioButtonSMS.Checked;
             bool portal = radioButtonPortal.Checked;

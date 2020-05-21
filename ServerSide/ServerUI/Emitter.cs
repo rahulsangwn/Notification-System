@@ -26,8 +26,10 @@ namespace ServerUI
 
         private void buttonPush_Click(object sender, EventArgs e)
         {
-            if (_notification.CreateNotification(comboBoxNotificationType.Text, textBoxNotification.Text))
+            int notifId = _notification.CreateNotification(comboBoxNotificationType.Text, textBoxNotification.Text);
+            if (notifId != 0)
             {
+                _manager.PushNotification(notifId);
                 MessageBox.Show("Notifcation Pushed to Subscriber!");
                 Reset();
             }
