@@ -10,6 +10,10 @@ namespace DataAccessLayer.DataAccess
     {
         NotificationContext _context = new NotificationContext();
 
+        public int[] GetGroups(int userId)
+        {
+            return _context.UserGroups.Where(u => u.UserId == userId).Select(u => u.OrgGroupId).ToArray();
+        }
         public int[] GetUserList(string receiver)
         {
             if(receiver == "All")
@@ -55,6 +59,31 @@ namespace DataAccessLayer.DataAccess
                 }
 
                 return userIds.ToArray();
+            }
+        }
+
+        public void AddNewGroupsForUser(int userId, int[] orgGroupIds)
+        {
+            for (int i = 0; i < orgGroupIds.Length; i++)
+            {
+                UserGroup group = new UserGroup();
+                group.OrgGroupId = orgGroupIds[i];
+                group.UserId = userId;
+                group.TypeId = 1;
+                group.CommModes = 0;
+
+                _context.UserGroups.Add(group);
+                _context.SaveChanges();
+            }
+        }
+
+        public void ClearOrgGroupsForUser(int userId)
+        {
+            var groups = _context.UserGroups.Where(g => g.UserId == userId).ToList();
+            foreach (var group in groups)
+            {
+                _context.UserGroups.Remove(group);
+                _context.SaveChanges();
             }
         }
     }

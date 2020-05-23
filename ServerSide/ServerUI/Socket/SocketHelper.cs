@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,6 +12,7 @@ namespace ServerUI.Socket
     {
         UserProcessor _uprocessor = new UserProcessor();
         RecipientsProcessor _rprocessor = new RecipientsProcessor();
+        UserGroupProcessor _ugProcessor = new UserGroupProcessor();
 
         internal int VerifyIdentiy(string recivedText)
         {
@@ -20,6 +22,20 @@ namespace ServerUI.Socket
         internal byte[] GetNotifications(int userId, char mode)
         {
             return _rprocessor.GetNotifications(userId, mode);
+        }
+
+        internal string GetSubscriptions(int userId)
+        {
+            return _ugProcessor.GetSubscriptions(userId);
+        }
+
+        internal void SetSubscriptions(string newSubscriptions, TcpClient client)
+        {
+            // Extracting userId
+            var userId = VerifyIdentiy(ServerSocket.loginedClients[client]);
+
+            // Clear Old subscriptions and Set New Subscription groups for this userId
+            _ugProcessor.SetSubscriptions(newSubscriptions, userId);
         }
     }
 }

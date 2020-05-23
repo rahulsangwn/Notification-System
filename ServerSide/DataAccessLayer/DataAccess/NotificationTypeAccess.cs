@@ -23,5 +23,10 @@ namespace DataAccessLayer.DataAccess
 
             return null;
         }
+
+        public string GetName(int typeId)
+        {
+            return _context.NotificationTypes.Where(t => t.TypeId == typeId).Select(t => t.Name).First();
+        }
     }
 }

@@ -18,6 +18,8 @@ namespace ClientSide
         SocketManager _manager;
         NotificationForm _notificationForm;
         ClientSocket _socket;
+        string _mode;
+        string _identity;
 
         public ModeSelectionForm(NotificationForm notificationForm, SocketManager manager, ClientSocket socket)
         {
@@ -37,13 +39,20 @@ namespace ClientSide
         // Enabling Next Button based on Verification Resopnse
         private void EnableNextButton(object sender, DataRecEventArgs e)
         {
-            if (e.text == "true")
+            var resData = e.text.Split(':');
+            if (resData[0] == "true")
             {
                 buttonModeSelectionFormNext.Enabled = true;
                 checkedListBoxSubscription.Enabled = true;
                 buttonUpdateSubscriptions.Show();
+                
+                // Checking subscribed Groups in listBox
+                for (int i = 1; i < resData.Length; i++)
+                {
+                    checkedListBoxSubscription.SetItemChecked(int.Parse(resData[i]) - 1, true);
+                }
             }
-            else if(e.text == "false")
+            else if(resData[0] == "false")
             {
                 buttonModeSelectionFormNext.Enabled = false;
                 checkedListBoxSubscription.Enabled = false;
@@ -55,7 +64,11 @@ namespace ClientSide
         private async void buttonVerify_Click(object sender, EventArgs e)
         {
             // Clear the selected check boxes;
-            checkedListBoxSubscription.ClearSelected();
+            for (int i = 0; i < checkedListBoxSubscription.Items.Count; i++)
+            {
+                checkedListBoxSubscription.SetItemChecked(i, false);
+            }
+
             _notificationForm.ClearData();
             bool email = radioButtonEmail.Checked;
             bool sms = radioButtonSMS.Checked;
@@ -64,13 +77,23 @@ namespace ClientSide
             StringBuilder verifyRequest = new StringBuilder();
 
             if (email)
+            {
                 verifyRequest.Append("Email:");
+                _mode = "Email";
+            }
             else if (sms)
+            {
                 verifyRequest.Append("SMS:");
+                _mode = "SMS";
+            }
             else if (portal)
+            {
                 verifyRequest.Append("Portal:");
+                _mode = "Online Portal";
+            }
 
             verifyRequest.Append(textBoxIdentity.Text);
+            _identity = textBoxIdentity.Text;
             var value = await _manager.IsValidUser(verifyRequest.ToString());
         }
 
@@ -78,6 +101,9 @@ namespace ClientSide
         {
             // Unsubscribe From DataReceived Event
             _socket.DataReceived -= EnableNextButton;
+
+            // Seting Info in Notification Form
+            _notificationForm.SetInfo(_mode, _identity);
 
             // Closing Connection Form and Opening Model Selection Form
             this.Hide();
@@ -87,19 +113,16 @@ namespace ClientSide
 
         private void buttonUpdateSubscriptions_Click(object sender, EventArgs e)
         {
-            StringBuilder subscriptionsIndicies = new StringBuilder();
-            for (int i=0; i<5; i++)
+            StringBuilder subscriptionsIndicies = new StringBuilder("Subscriptions");
+            for (int i = 0; i < 6; i++)
             {
                 if(checkedListBoxSubscription.GetItemChecked(i))
                 {
-                    subscriptionsIndicies.Append(i + ":");
+                    subscriptionsIndicies.Append(":" + (i + 2));
                 }
             }
 
-            if(!String.IsNullOrEmpty(subscriptionsIndicies.ToString()))
-            {
-                subscriptionsIndicies.Remove(subscriptionsIndicies.Length - 2, subscriptionsIndicies.Length - 1);
-            }
+            _manager.SendData(subscriptionsIndicies.ToString());
         }
     }
 }

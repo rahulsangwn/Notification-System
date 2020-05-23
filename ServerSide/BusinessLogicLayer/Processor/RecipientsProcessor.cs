@@ -11,6 +11,7 @@ namespace BusinessLogicLayer.Processor
     {
         RecipientsAccess _recipients = new RecipientsAccess();
         NotificationsAccess _notification = new NotificationsAccess();
+        NotificationTypesAccess _type = new NotificationTypesAccess();
         CommunicationModesAccess _mode = new CommunicationModesAccess();
         UserProcessor _uprocessor = new UserProcessor();
 
@@ -24,9 +25,12 @@ namespace BusinessLogicLayer.Processor
                 // Get notification for apropriate communication mode only
                 if (_mode.GetName(item.CommModes).Contains(mode))
                 {
-                    itemString.Append("Notification ");
-                    itemString.Append(item.NotifId + " ");
-                    itemString.Append(_notification.Get(item.NotifId).NotifBody);
+                    var notification = _notification.Get(item.NotifId);
+                    itemString.Append("Notification,");
+                    itemString.Append(item.NotifId + ",");
+                    itemString.Append(_type.GetName(notification.TypeId) + ",");
+                    itemString.Append(notification.NotifBody + ",");
+                    itemString.Append(notification.CreateDate.ToShortDateString());
                     itemString.Append(":");
                 }
             }

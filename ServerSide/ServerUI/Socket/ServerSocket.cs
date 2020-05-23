@@ -128,6 +128,10 @@ namespace ServerUI.Socket
             {
 
             } 
+            else if (recivedText.StartsWith("Subscription"))
+            {
+                _helper.SetSubscriptions(recivedText, client);
+            }
             else
             {
                 if (!loginedClients.ContainsKey(client))
@@ -135,7 +139,8 @@ namespace ServerUI.Socket
                     loginedClients.Add(client, recivedText);
                 }
                 var userId = _helper.VerifyIdentiy(recivedText);
-                byte[] response = userId != 0 ? Encoding.ASCII.GetBytes("true") : Encoding.ASCII.GetBytes("false");
+                var subscriptions = _helper.GetSubscriptions(userId);
+                byte[] response = userId != 0 ? Encoding.ASCII.GetBytes("true" + subscriptions) : Encoding.ASCII.GetBytes("false" + subscriptions);
 
                 Send(response, client);
                 int milliseconds = 1000;

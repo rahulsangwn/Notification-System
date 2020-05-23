@@ -123,7 +123,6 @@
             // 
             this.checkedListBoxSubscription.FormattingEnabled = true;
             this.checkedListBoxSubscription.Items.AddRange(new object[] {
-            "All",
             "Gurgoan",
             "Jaipur",
             "Noida",

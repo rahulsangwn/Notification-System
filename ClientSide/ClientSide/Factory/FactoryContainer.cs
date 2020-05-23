@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using ClientSide.Data;
 using ClientSide.Socket;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ namespace ClientSide.Factory
             builder.RegisterType<NotificationForm>();
             builder.RegisterType<ModeSelectionForm>();
             builder.RegisterType<SocketManager>();
+            builder.RegisterType<DataExtraction>();
             Container = builder.Build();
             return Container;
         }

@@ -9,6 +9,8 @@ namespace ClientSide.Data
     public class NotificationEntity
     {
         public int Id { get; set; }
-        public string NotifBody { get; set; }
+        public string Type { get; set; }
+        public string Notification { get; set; }
+        public DateTime Date { get; set; }
     }
 }

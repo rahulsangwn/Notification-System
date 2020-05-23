@@ -12,9 +12,11 @@ namespace ClientSide.Socket
     public class SocketManager
     {
         ClientSocket _socket;
-        public SocketManager(ClientSocket socket)
+        DataExtraction _data;
+        public SocketManager(ClientSocket socket, DataExtraction data)
         {
             _socket = socket;
+            _data = data;
         }
 
         public async Task<bool> IsValidUser(string user)
@@ -25,6 +27,10 @@ namespace ClientSide.Socket
             return true;
         }
 
+        internal async void SendData(string data)
+        {
+            await _socket.SendData(Encoding.ASCII.GetBytes(data));
+        }
     }
 }
 

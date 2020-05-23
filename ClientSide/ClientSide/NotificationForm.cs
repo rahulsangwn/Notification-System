@@ -21,30 +21,33 @@ namespace ClientSide
         {
             _socket = socket;
             InitializeComponent();
-            textBoxNotification.Enabled = false;
-            _socket.DataReceived += PrintInBox;
+            dateDataGridViewTextBoxColumn.ReadOnly = true;
         }
 
-        private async void PrintInBox(object sender, DataRecEventArgs e)
+        public void SetInfo(string mode, string identity)
         {
-            if(e.text.StartsWith("Notification"))
-            {
-                string[] notifications = e.text.Split(':');
-                StringBuilder acks = new StringBuilder("Ack:");
-                foreach(var notification in notifications)
-                {
-                    textBoxNotification.AppendText(notification);
-                    textBoxNotification.AppendText(Environment.NewLine);
-                    var notifId = notification.Split(' ')[1];
-                    acks.Append(notifId + ":");
-                }
-                await _socket.SendData(Encoding.ASCII.GetBytes(acks.ToString()));
-            }
+            labelInfo.Text = mode + ": " + identity;
         }
 
         internal void ClearData()
         {
-            textBoxNotification.Text = "";
+            NotificationData.Clear();
+        }
+
+        private void NotificationForm_Load(object sender, EventArgs e)
+        {
+            foreach (var notification in NotificationData.GetAll())
+            {
+                notificationEntityBindingSource.Add(notification);
+            }
+        }
+
+        private void dataGridViewNotification_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridViewNotification.Columns[e.ColumnIndex].Name == "Clear")
+            {
+                notificationEntityBindingSource.RemoveCurrent();
+            }
         }
     }
 }
