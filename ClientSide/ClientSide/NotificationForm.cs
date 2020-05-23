@@ -16,16 +16,41 @@ namespace ClientSide
     public partial class NotificationForm : Form
     {
         ClientSocket _socket;
+        SocketManager _manager;
+        DataExtraction _data;
+        string _mode;
+        string _identity;
 
-        public NotificationForm(ClientSocket socket)
+        public NotificationForm(ClientSocket socket, SocketManager manager, DataExtraction data)
         {
             _socket = socket;
+            _manager = manager;
+            _data = data;
             InitializeComponent();
             dateDataGridViewTextBoxColumn.ReadOnly = true;
+            _data.NewNotification += NewNotificationReceived;
+        }
+
+        private void NewNotificationReceived(object sender, NotificationEntity e)
+        {
+            var notification = e;
+            //DataTable data = (DataTable) grid;
+            //notificationEntityBindingSource.Add(notification);
+            notificationEntityBindingSource.DataSource = null;
+            notificationEntityBindingSource.DataSource = NotificationData.GetAll();
+            //DataRow rowToAdd = data.NewRow();
+            //rowToAdd["Type"] = e.Type;
+            //rowToAdd["Notification"] = e.Notification;
+            //rowToAdd["Date"] = e.Date;
+            //data.Rows.Add(rowToAdd);
+            //var data = notificationEntityBindingSource.AddNew();
+            //dataGridViewNotification.Rows.Add(notification);
         }
 
         public void SetInfo(string mode, string identity)
         {
+            _mode = mode;
+            _identity = identity;
             labelInfo.Text = mode + ": " + identity;
         }
 
@@ -46,6 +71,10 @@ namespace ClientSide
         {
             if (dataGridViewNotification.Columns[e.ColumnIndex].Name == "Clear")
             {
+                var notification = dataGridViewNotification.Rows[e.RowIndex].Cells[1].Value.ToString();
+                var notificationId = NotificationData.GetId(notification);
+                string clearReq = "Clear:" + _mode + ":" + _identity + ":" + notificationId;
+                _manager.SendData(clearReq);
                 notificationEntityBindingSource.RemoveCurrent();
             }
         }

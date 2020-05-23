@@ -24,7 +24,7 @@ namespace DataAccessLayer
         [Column(TypeName = "date")]
         public DateTime? ExpiryDate { get; set; }
 
-        [Column(TypeName = "date")]
+        [Column(TypeName = "datetime")]
         public DateTime CreateDate { get; set; }
 
         public int TypeId { get; set; }

@@ -21,8 +21,8 @@ namespace ClientSide.Factory
             builder.RegisterType<ConnectionForm>();
             builder.RegisterType<NotificationForm>();
             builder.RegisterType<ModeSelectionForm>();
-            builder.RegisterType<SocketManager>();
-            builder.RegisterType<DataExtraction>();
+            builder.RegisterType<SocketManager>().SingleInstance();
+            builder.RegisterType<DataExtraction>().SingleInstance();
             Container = builder.Build();
             return Container;
         }

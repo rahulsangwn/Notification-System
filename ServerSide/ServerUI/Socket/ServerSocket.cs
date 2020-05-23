@@ -94,7 +94,7 @@ namespace ServerUI.Socket
                 stream = client.GetStream();
                 reader = new StreamReader(stream);
 
-                char[] buff = new char[1024];
+                char[] buff = new char[1024 * 1024];
 
                 while(IsRunning)
                 {

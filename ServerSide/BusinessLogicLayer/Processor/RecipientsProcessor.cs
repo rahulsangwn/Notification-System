@@ -30,8 +30,8 @@ namespace BusinessLogicLayer.Processor
                     itemString.Append(item.NotifId + ",");
                     itemString.Append(_type.GetName(notification.TypeId) + ",");
                     itemString.Append(notification.NotifBody + ",");
-                    itemString.Append(notification.CreateDate.ToShortDateString());
-                    itemString.Append(":");
+                    itemString.Append(notification.CreateDate.ToString());
+                    itemString.Append("$");
                 }
             }
             return Encoding.ASCII.GetBytes(itemString.ToString().Remove(itemString.Length - 1, 1));
@@ -52,9 +52,12 @@ namespace BusinessLogicLayer.Processor
             {
                 if (_mode.GetName(notification.CommModes).Contains(mode))
                 {
-                    itemString.Append("Notification ");
-                    itemString.Append(notification.NotifId + " ");
-                    itemString.Append(_notification.Get(notification.NotifId).NotifBody);
+                    var notif = _notification.Get(notification.NotifId);
+                    itemString.Append("Notification,");
+                    itemString.Append(notification.NotifId + ",");
+                    itemString.Append(_type.GetName(notif.TypeId) + ",");
+                    itemString.Append(notif.NotifBody + ",");
+                    itemString.Append(notif.CreateDate.ToString());
                 }
             }
 

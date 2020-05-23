@@ -68,7 +68,7 @@ namespace ClientSide.Socket
             {
                 StreamReader clientStreamReader = new StreamReader(client.GetStream());
                 
-                char[] buff = new char[1024];
+                char[] buff = new char[1024 * 1024];
                 int readByteCount = 0;
 
                 while (true)

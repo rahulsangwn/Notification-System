@@ -30,12 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridViewNotification = new System.Windows.Forms.DataGridView();
+            this.notificationEntityBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.labelInfo = new System.Windows.Forms.Label();
             this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.notificationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Clear = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.notificationEntityBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.labelInfo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNotification)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationEntityBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -65,42 +65,6 @@
             this.dataGridViewNotification.TabIndex = 0;
             this.dataGridViewNotification.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewNotification_CellContentClick);
             // 
-            // typeDataGridViewTextBoxColumn
-            // 
-            this.typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
-            this.typeDataGridViewTextBoxColumn.Frozen = true;
-            this.typeDataGridViewTextBoxColumn.HeaderText = "Type";
-            this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
-            this.typeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.typeDataGridViewTextBoxColumn.Width = 130;
-            // 
-            // notificationDataGridViewTextBoxColumn
-            // 
-            this.notificationDataGridViewTextBoxColumn.DataPropertyName = "Notification";
-            this.notificationDataGridViewTextBoxColumn.Frozen = true;
-            this.notificationDataGridViewTextBoxColumn.HeaderText = "Notification";
-            this.notificationDataGridViewTextBoxColumn.Name = "notificationDataGridViewTextBoxColumn";
-            this.notificationDataGridViewTextBoxColumn.ReadOnly = true;
-            this.notificationDataGridViewTextBoxColumn.Width = 400;
-            // 
-            // dateDataGridViewTextBoxColumn
-            // 
-            this.dateDataGridViewTextBoxColumn.DataPropertyName = "Date";
-            this.dateDataGridViewTextBoxColumn.Frozen = true;
-            this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
-            this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
-            this.dateDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // Clear
-            // 
-            this.Clear.Frozen = true;
-            this.Clear.HeaderText = "";
-            this.Clear.Name = "Clear";
-            this.Clear.ReadOnly = true;
-            this.Clear.Text = "Clear";
-            this.Clear.UseColumnTextForButtonValue = true;
-            this.Clear.Width = 80;
-            // 
             // notificationEntityBindingSource
             // 
             this.notificationEntityBindingSource.DataSource = typeof(ClientSide.Data.NotificationEntity);
@@ -113,6 +77,46 @@
             this.labelInfo.Size = new System.Drawing.Size(72, 20);
             this.labelInfo.TabIndex = 1;
             this.labelInfo.Text = "label info";
+            // 
+            // typeDataGridViewTextBoxColumn
+            // 
+            this.typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
+            this.typeDataGridViewTextBoxColumn.Frozen = true;
+            this.typeDataGridViewTextBoxColumn.HeaderText = "Type";
+            this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
+            this.typeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.typeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.typeDataGridViewTextBoxColumn.Width = 130;
+            // 
+            // notificationDataGridViewTextBoxColumn
+            // 
+            this.notificationDataGridViewTextBoxColumn.DataPropertyName = "Notification";
+            this.notificationDataGridViewTextBoxColumn.Frozen = true;
+            this.notificationDataGridViewTextBoxColumn.HeaderText = "Notification";
+            this.notificationDataGridViewTextBoxColumn.Name = "notificationDataGridViewTextBoxColumn";
+            this.notificationDataGridViewTextBoxColumn.ReadOnly = true;
+            this.notificationDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.notificationDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.notificationDataGridViewTextBoxColumn.Width = 400;
+            // 
+            // dateDataGridViewTextBoxColumn
+            // 
+            this.dateDataGridViewTextBoxColumn.DataPropertyName = "Date";
+            this.dateDataGridViewTextBoxColumn.Frozen = true;
+            this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
+            this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
+            this.dateDataGridViewTextBoxColumn.ReadOnly = true;
+            this.dateDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // Clear
+            // 
+            this.Clear.Frozen = true;
+            this.Clear.HeaderText = "";
+            this.Clear.Name = "Clear";
+            this.Clear.ReadOnly = true;
+            this.Clear.Text = "Clear";
+            this.Clear.UseColumnTextForButtonValue = true;
+            this.Clear.Width = 80;
             // 
             // NotificationForm
             // 

@@ -10,7 +10,7 @@ namespace ClientSide.Data
     {
         static List<NotificationEntity> list = new List<NotificationEntity>();
         
-        public static void Add(int id, string type, string body, string date)
+        public static NotificationEntity Add(int id, string type, string body, string date)
         {
             NotificationEntity entity = new NotificationEntity();
 
@@ -19,6 +19,8 @@ namespace ClientSide.Data
             entity.Notification = body;
             entity.Date = DateTime.Parse(date);
             list.Add(entity);
+
+            return entity;
         }
 
         public static void Clear()
@@ -28,7 +30,12 @@ namespace ClientSide.Data
 
         public static IList<NotificationEntity> GetAll()
         {
-            return list;
+            return list.OrderByDescending(n => n.Date).ToList();
+        }
+
+        internal static int GetId(string notification)
+        {
+            return list.Find(n => n.Notification == notification).Id;
         }
     }
 }
