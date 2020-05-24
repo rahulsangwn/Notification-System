@@ -37,6 +37,11 @@ namespace BusinessLogicLayer.Processor
             return Encoding.ASCII.GetBytes(itemString.ToString().Remove(itemString.Length - 1, 1));
         }
 
+        public void ClearNotification(int userId, string notifId)
+        {
+            _recipients.Clear(userId, int.Parse(notifId));
+        }
+
         public byte[] FetchUserNotification(string communication, int notifId)
         {
             communication = communication.Replace("\0", string.Empty);
