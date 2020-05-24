@@ -21,5 +21,12 @@ namespace DataAccessLayer.DataAccess
         {
             return _context.Recipients.Where(r => r.UserId == userId).ToList();
         }
+
+        public void Clear(int userId, int notifId)
+        {
+            var notification = _context.Recipients.FirstOrDefault(r => r.UserId == userId && r.NotifId == notifId);
+            _context.Recipients.Remove(notification);
+            _context.SaveChanges();
+        }
     }
 }

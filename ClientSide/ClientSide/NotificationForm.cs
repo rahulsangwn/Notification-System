@@ -15,13 +15,13 @@ namespace ClientSide
 {
     public partial class NotificationForm : Form
     {
-        ClientSocket _socket;
-        SocketManager _manager;
-        DataExtraction _data;
+        IClientSocket _socket;
+        ISocketManager _manager;
+        IDataExtraction _data;
         string _mode;
         string _identity;
 
-        public NotificationForm(ClientSocket socket, SocketManager manager, DataExtraction data)
+        public NotificationForm(IClientSocket socket, ISocketManager manager, IDataExtraction data)
         {
             _socket = socket;
             _manager = manager;
@@ -31,20 +31,13 @@ namespace ClientSide
             _data.NewNotification += NewNotificationReceived;
         }
 
-        private void NewNotificationReceived(object sender, NotificationEntity e)
+        private void NewNotificationReceived(object sender, INotificationEntity e)
         {
             var notification = e;
-            //DataTable data = (DataTable) grid;
-            //notificationEntityBindingSource.Add(notification);
+            
             notificationEntityBindingSource.DataSource = null;
             notificationEntityBindingSource.DataSource = NotificationData.GetAll();
-            //DataRow rowToAdd = data.NewRow();
-            //rowToAdd["Type"] = e.Type;
-            //rowToAdd["Notification"] = e.Notification;
-            //rowToAdd["Date"] = e.Date;
-            //data.Rows.Add(rowToAdd);
-            //var data = notificationEntityBindingSource.AddNew();
-            //dataGridViewNotification.Rows.Add(notification);
+            
         }
 
         public void SetInfo(string mode, string identity)

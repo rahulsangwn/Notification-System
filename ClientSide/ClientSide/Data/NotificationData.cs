@@ -8,11 +8,11 @@ namespace ClientSide.Data
 {
     public static class NotificationData
     {
-        static List<NotificationEntity> list = new List<NotificationEntity>();
+        static List<INotificationEntity> list = new List<INotificationEntity>();
         
-        public static NotificationEntity Add(int id, string type, string body, string date)
+        public static INotificationEntity Add(int id, string type, string body, string date)
         {
-            NotificationEntity entity = new NotificationEntity();
+            INotificationEntity entity = new NotificationEntity();
 
             entity.Id = id;
             entity.Type = type;
@@ -28,7 +28,7 @@ namespace ClientSide.Data
             list.Clear();
         }
 
-        public static IList<NotificationEntity> GetAll()
+        public static IList<INotificationEntity> GetAll()
         {
             return list.OrderByDescending(n => n.Date).ToList();
         }

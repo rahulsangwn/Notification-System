@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClientSide.Data
 {
-    public class NotificationEntity
+    public class NotificationEntity : INotificationEntity
     {
         public int Id { get; set; }
         public string Type { get; set; }

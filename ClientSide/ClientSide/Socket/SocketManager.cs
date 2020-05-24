@@ -9,11 +9,11 @@ using static ClientSide.Socket.ClientSocket;
 
 namespace ClientSide.Socket
 {
-    public class SocketManager
+    public class SocketManager : ISocketManager
     {
-        ClientSocket _socket;
-        DataExtraction _data;
-        public SocketManager(ClientSocket socket, DataExtraction data)
+        IClientSocket _socket;
+        IDataExtraction _data;
+        public SocketManager(IClientSocket socket, IDataExtraction data)
         {
             _socket = socket;
             _data = data;
@@ -27,7 +27,7 @@ namespace ClientSide.Socket
             return true;
         }
 
-        internal async void SendData(string data)
+        public async void SendData(string data)
         {
             await _socket.SendData(Encoding.ASCII.GetBytes(data));
         }

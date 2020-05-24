@@ -37,5 +37,15 @@ namespace ServerUI.Socket
             // Clear Old subscriptions and Set New Subscription groups for this userId
             _ugProcessor.SetSubscriptions(newSubscriptions, userId);
         }
+
+        internal void ClearNotification(string recivedText, TcpClient client)
+        {
+            // Extracting userId
+            var userId = VerifyIdentiy(ServerSocket.loginedClients[client]);
+
+            // Clearing Notification from recipients queue
+            var notifId = recivedText.Split(':')[3];
+            _rprocessor.ClearNotification(userId, notifId);
+        }
     }
 }

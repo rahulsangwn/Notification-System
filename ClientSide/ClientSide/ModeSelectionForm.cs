@@ -15,13 +15,13 @@ namespace ClientSide
 {
     public partial class ModeSelectionForm : Form
     {
-        SocketManager _manager;
+        ISocketManager _manager;
         NotificationForm _notificationForm;
-        ClientSocket _socket;
+        IClientSocket _socket;
         string _mode;
         string _identity;
 
-        public ModeSelectionForm(NotificationForm notificationForm, SocketManager manager, ClientSocket socket)
+        public ModeSelectionForm(NotificationForm notificationForm, ISocketManager manager, IClientSocket socket)
         {
             InitializeComponent();
 
@@ -49,7 +49,7 @@ namespace ClientSide
                 // Checking subscribed Groups in listBox
                 for (int i = 1; i < resData.Length; i++)
                 {
-                    checkedListBoxSubscription.SetItemChecked(int.Parse(resData[i]) - 1, true);
+                    checkedListBoxSubscription.SetItemChecked(int.Parse(resData[i]) - 2, true);
                 }
             }
             else if(resData[0] == "false")

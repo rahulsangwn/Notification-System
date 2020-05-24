@@ -16,9 +16,9 @@ namespace ClientSide
 {
     public partial class ConnectionForm : Form
     {
-        ClientSocket client;
+        IClientSocket client;
         ModeSelectionForm _modeSelectionForm;
-        public ConnectionForm(ClientSocket socket, ModeSelectionForm modeSelectionForm)
+        public ConnectionForm(IClientSocket socket, ModeSelectionForm modeSelectionForm)
         {
             InitializeComponent();
             buttonServerNext.Enabled = false;

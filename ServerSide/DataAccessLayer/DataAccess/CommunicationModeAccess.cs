@@ -12,7 +12,8 @@ namespace DataAccessLayer.DataAccess
 
         public string GetName(int mode)
         {
-            return _context.CommunicationModes.Where(m => m.Value == mode).Select(m => m.Name).ToString();
+            var name = _context.CommunicationModes.First(m => m.Value == mode).Name;
+            return name;
         }
     }
 }

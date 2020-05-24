@@ -128,6 +128,10 @@ namespace ServerUI.Socket
             {
 
             } 
+            else if (recivedText.StartsWith("Clear"))
+            {
+                _helper.ClearNotification(recivedText, client);
+            }
             else if (recivedText.StartsWith("Subscription"))
             {
                 _helper.SetSubscriptions(recivedText, client);

@@ -11,15 +11,15 @@ using System.Threading.Tasks;
 
 namespace ClientSide.Socket
 {
-    public class ClientSocket
+    public class ClientSocket : IClientSocket
     {
         IPAddress serverIP;
         int serverPort;
         TcpClient client;
 
-        public ClientSocket()
-        {
-        }
+        //public ClientSocket()
+        //{
+        //}
 
         public async Task SendData(byte[] data)
         {
