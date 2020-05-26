@@ -55,7 +55,12 @@ namespace DataAccessLayer.DataAccess
                 List<int> userIds = new List<int>();
                 foreach (var email in emails)
                 {
-                    userIds.Add(_context.Users.Where(u => u.Email == email).Select(u => u.UserId).First());
+                    var userId = _context.Users.Where(u => u.Email == email).Select(u => u.UserId).FirstOrDefault();
+                    if (userId == 0)
+                    {
+                        return null;
+                    }
+                    userIds.Add(userId);
                 }
 
                 return userIds.ToArray();

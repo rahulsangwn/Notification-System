@@ -28,12 +28,17 @@ namespace ServerUI
 
         private void buttonPush_Click(object sender, EventArgs e)
         {
-            int notifId = _notification.CreateNotification(comboBoxNotificationType.Text, comboBoxGroup.Text, textBoxNotification.Text);
-            if (notifId != 0)
+            if (!string.IsNullOrEmpty(textBoxNotification.Text) &&
+                !string.IsNullOrEmpty(comboBoxGroup.Text) &&
+                !string.IsNullOrEmpty(comboBoxNotificationType.Text))
             {
-                _manager.PushNotification(notifId);
-                MessageBox.Show("Notifcation Pushed to Subscriber!");
-                Reset();
+                int notifId = _notification.CreateNotification(comboBoxNotificationType.Text, comboBoxGroup.Text, textBoxNotification.Text);
+                if (notifId != 0)
+                {
+                    _manager.PushNotification(notifId);
+                    MessageBox.Show("Notifcation Pushed to Subscriber!");
+                    Reset();
+                }
             }
         }
 

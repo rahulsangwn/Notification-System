@@ -21,6 +21,11 @@ namespace BusinessLogicLayer.Processor
             // Get notification type
             NotificationType type = _type.Get(typeName); 
 
+            if (type == null)
+            {
+                return 0;
+            }
+
             Notification notification = new Notification();
             notification.CreateDate = DateTime.Now;
             notification.NotifBody  = content;
@@ -33,16 +38,19 @@ namespace BusinessLogicLayer.Processor
             int[] users = _group.GetUserList(recivers);
 
             // Insert notification for each user in Recipients queue
-            foreach (var user in users)
+            if (users != null)
             {
-                Recipient recipient = new Recipient();
-                recipient.UserId = user;
-                recipient.CommModes = type.CommModes;
-                recipient.ReceivedModes = 0;
-                recipient.ClearedModes = 0;
-                recipient.NotifId = notifId;
+                foreach (var user in users)
+                {
+                    Recipient recipient = new Recipient();
+                    recipient.UserId = user;
+                    recipient.CommModes = type.CommModes;
+                    recipient.ReceivedModes = 0;
+                    recipient.ClearedModes = 0;
+                    recipient.NotifId = notifId;
 
-                _recipient.Create(recipient);
+                    _recipient.Create(recipient);
+                }
             }
 
             Debug.WriteLine("[>] Notification Pushed to Clients");

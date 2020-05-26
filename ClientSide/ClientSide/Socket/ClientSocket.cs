@@ -17,10 +17,6 @@ namespace ClientSide.Socket
         int serverPort;
         TcpClient client;
 
-        //public ClientSocket()
-        //{
-        //}
-
         public async Task SendData(byte[] data)
         {
             if(client != null)
@@ -79,6 +75,10 @@ namespace ClientSide.Socket
                     {
                         Console.WriteLine("Disconnected from server.");
                         client.Close();
+
+                        // Closing the application
+                        System.Windows.Forms.Application.Exit();
+
                         break;
                     } else
                     {

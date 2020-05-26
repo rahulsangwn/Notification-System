@@ -124,18 +124,22 @@ namespace ServerUI.Socket
 
         private void ReadingHandler(string recivedText, TcpClient client)
         {
+            // For future acknowledgment purposes
             if (recivedText.StartsWith("Ack"))
             {
 
             } 
+            // To clear the notifications from the recepient queue
             else if (recivedText.StartsWith("Clear"))
             {
                 _helper.ClearNotification(recivedText, client);
             }
+            // For subscription of groups
             else if (recivedText.StartsWith("Subscription"))
             {
                 _helper.SetSubscriptions(recivedText, client);
             }
+            // For client identity validation
             else
             {
                 if (!loginedClients.ContainsKey(client))

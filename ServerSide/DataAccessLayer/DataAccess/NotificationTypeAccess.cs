@@ -18,7 +18,7 @@ namespace DataAccessLayer.DataAccess
         {
             if(_context.NotificationTypes.Any(t => t.Name == type))
             {
-                return _context.NotificationTypes.First(t => t.Name == type);
+                return _context.NotificationTypes.FirstOrDefault(t => t.Name == type);
             }
 
             return null;
